@@ -4,6 +4,7 @@
         var opt = {
             //browsers coefficients
             coef: {
+                deault: {},
                 // Desktop
                 desktop: {
 
@@ -42,16 +43,32 @@
                 },
                 //Adaptiv
                 adaptiv: {
-                    widthDesign:     .25,
-                    withoutDesign:   .1
-                },
-                //Screens
-                screens: {
-                    withDesign:       .04,
-                    withoutDesign:    .02
+                    movePrototype: {
+                        hasPrototype: .25,
+                        hasNotPrototype: .1
+                    },
+                    //Screens
+                    screens: {
+                        md: {
+                            fix: .02,
+                            fluid: .04
+                        },
+                        lg: {
+                            fix: .02,
+                            fluid: .04
+                        },
+                        xs: {
+                            fix: .02,
+                            fluid: .04
+                        },
+                        xxs: {
+                            fix: .02,
+                            fluid: .04
+                        }
+                    }
                 },
                 //Retina
-                retina:    .15
+                retina: .15
             },
             const: {
                 print: {
@@ -75,8 +92,15 @@
                         chrome: {}
                     }
                 },
-                adaptiv: {},
-                screens: {},
+                adaptiv: {
+                    movePrototype: {},
+                    screens: {
+                        md: {},
+                        lg: {},
+                        xs: {},
+                        xxs: {}
+                    }
+                },
                 retina: {},
                 print: {}
             }
@@ -96,10 +120,10 @@
         }
 
         /*function _setAdaptivCheckbox(form, check_b, check_c) {
-            form.find(check_b, check_c).on('change', function () {
-                form.find(check_b).not($(this)).removeAttr('checked');
-            });
-        }*/
+         form.find(check_b, check_c).on('change', function () {
+         form.find(check_b).not($(this)).removeAttr('checked');
+         });
+         }*/
 
 
         function _getCheckboxes() {
@@ -107,6 +131,9 @@
             _setCheckbox(opt.form.container, '.safari');
             _setCheckbox(opt.form.container, '.iem');
             _setCheckbox(opt.form.container, '.adaptiv');
+            _setCheckbox(opt.form.container, '.md');
+            _setCheckbox(opt.form.container, '.lg');
+            _setCheckbox(opt.form.container, '.xs');
         }
 
         function _getBrowsers(device, browser) {
@@ -114,19 +141,15 @@
             opt.par.crossbrowser[device][browser] = opt.coef[device][browser][colCheckedCoef] || 0;
         }
 
-        function _getAdaptiv(form) {
-            var adaptivChoice = form.find('.adaptiv' + ':checked').attr('data-adaptiv') || 0;
-            switch (adaptivChoice) {
-                case "1": opt.par.adaptiv = opt.coef.adaptiv.withoutDesign; break;
-                case "2": opt.par.adaptiv = opt.coef.adaptiv.withDesign; break;
-                default: opt.par.adaptiv = adaptivChoice;
-            }
-            console.log(opt.par.adaptiv);
+        function _getProtitype() {
+            var variant = opt.form.container.find('.adaptiv:checked').data('adaptiv');
+            opt.par.adaptiv.movePrototype = opt.coef.adaptiv.movePrototype[variant] || 0;
+            console.log(variant);
         }
 
-        function _getScreens(form) {
-            var boxCheckedQuantity = form.find('.sizeVariant' + ':checked').length || 0;
-            console.log(boxCheckedQuantity);
+        function _getScreens(screen) {
+            var rowCheckedCoef = opt.form.container.find('.' + screen + ':checked').data('screen');
+            opt.par.adaptiv.screens[screen] = opt.coef.adaptiv.screens[screen][rowCheckedCoef] || 0;
         }
 
         function _getRetina(form) {
@@ -160,11 +183,14 @@
             _getBrowsers('mobile', 'android4');
             _getBrowsers('mobile', 'iem');
             _getBrowsers('mobile', 'chrome_m');
-            _getAdaptiv(form);
-            _getScreens(form);
+            _getProtitype();
+            _getScreens('md');
+            _getScreens('lg');
+            _getScreens('xs');
+            _getScreens('xxs');
             _getRetina(form);
             _getPrint(form);
-            console.log(opt.par);
+            console.log(opt.par.adaptiv);
         }
 
         function _calcBaseTime() {

@@ -228,56 +228,57 @@
                     </div>
 
                     <div class="alladaptiv"><label>
-                        <h4>Адаптив</h4>
-                        <input class="adaptiv" type="checkbox" name="adaptiv" data-adaptiv="1">
-                        адаптив без дизайна</label>
-                        <label>
-                            <input class="adaptiv" type="checkbox" name="adaptiv" data-adaptiv="2">
-                            адаптив по дизайну</label><br>
-                    </div>
-                    <h4> Разрешения экранов</h4><br>
-                    <div class="size">
-                        <table>
-                            <td>
-                                <div>
-                                    <div class="block">
-                                        <label>
-                                            <input class="sizeVariant" type="checkbox">
-                                            1280 и более fix</label>
-                                    </div>
-                            </td>
-                            <td>
-                                <div class="block">
-                                    <label>
-                                        <input class="sizeVariant" type="checkbox">
-                                        1024-1279 fix</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <label>
-                                        <input class="sizeVariant" type="checkbox">
-                                        768-1023 fix</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="block">
-                                    <label>
-                                        <input class="sizeVariant" type="checkbox">
-                                        320-767 резина</label>
-                                </div>
-                            </td>
-                        </table>
+                        <h2><label><input type="checkbox" id="adaptivhead">Адаптив</label></h2>
+                        <hr>
+                        <div class="adaptivblock">
+                            <label>
+                                <input class="adaptiv" type="radio" name="adaptiv"
+                                          data-adaptiv="hasNotPrototype">
+                                нет прототипов перестроения</label><br>
+                            <label>
+                                <input class="adaptiv" type="radio" name="adaptiv" data-adaptiv="hasPrototype">
+                                есть прототипы перестроения</label><br>
+                            <hr>
+                            <h4>Точки перестроения блоков</h4><br>
+                            <div class="size">
+                                <table><thead>
+                                    <td></td>
+                                    <td>fix</td>
+                                    <td>fluid</td>
+                                    <td></td>
+                                </thead>
+                                    <tr>
+                                        <td>>=1280</td>
+                                        <td><input class="md" type="radio" data-screen="fix"></td>
+                                        <td><input class="md" type="radio" data-screen="fluid"></td>
+                                        <td>Medium</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1024-1279</td>
+                                        <td><input class="lg" type="radio" data-screen="fix"></td>
+                                        <td><input class="lg" type="radio" data-screen="fluid"></td>
+                                        <td>Desktop</td>
+                                    </tr>
+                                    <tr>
+                                        <td>768-1023</td>
+                                        <td><input class="xs" type="radio" data-screen="fix"></td>
+                                        <td><input class="xs" type="radio" data-screen="fluid"></td>
+                                        <td>Tablet</td>
+                                    </tr>
+                                    <tr>
+                                        <td>320-767</td>
+                                        <td><input class="xxs" type="radio" disabled></td>
+                                        <td><input class="xxs" type="radio"  data-screen="fluid"></td>
+                                        <td>Mobile</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                     <span>
                           <label>
                               <input class="retina" type="checkbox">
                               ретина</label>
-                    </span><br>
-                    <span>
-                          <label>
-                              <input class="printcheck" type="checkbox">
-                              версия для печати</label>
                     </span><br>
                     <div class="invisibleprint" style="visibility:visible">
                         <label>Количество страниц для печати

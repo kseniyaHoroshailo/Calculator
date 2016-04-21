@@ -119,11 +119,18 @@
             });
         }
 
-        /*function _setAdaptivCheckbox(form, check_b, check_c) {
-         form.find(check_b, check_c).on('change', function () {
-         form.find(check_b).not($(this)).removeAttr('checked');
-         });
-         }*/
+        function _adaptivShovOrHide(boxClass,classIs) {
+            $(boxClass).fadeOut();
+            $(boxClass).on('click',
+                function() {
+                    alert(boxClass);
+                if ($(boxClass).attr('checked:checked')) {
+                    $(classIs).fadeIn();
+                } else {
+                    $(classIs).fadeOut();
+                }
+            });
+        }
 
 
         function _getCheckboxes() {
@@ -144,7 +151,6 @@
         function _getProtitype() {
             var variant = opt.form.container.find('.adaptiv:checked').data('adaptiv');
             opt.par.adaptiv.movePrototype = opt.coef.adaptiv.movePrototype[variant] || 0;
-            console.log(variant);
         }
 
         function _getScreens(screen) {
@@ -236,6 +242,7 @@
 
         if (opt.form.container.length) {
             opt.form.container.on('change', function () {
+                _adaptivShovOrHide(".adaptivhead",".adaptivblock");
                 calc();
             });
 

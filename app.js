@@ -42,16 +42,23 @@
                 },
                 //Adaptiv
                 adaptiv: {
-                    widthDesign:     .04,
-                    withoutDesign:   .02
+                    widthDesign:     .25,
+                    withoutDesign:   .1
                 },
                 //Screens
                 screens: {
-                    withDesign:       .02,
-                    withoutDesign:    .04
+                    withDesign:       .04,
+                    withoutDesign:    .02
+                },
+                //Retina
+                retina:    .15
+            },
+            const: {
+                print: {
+                    firstPage: 4,
+                    otherPage: 2
                 }
             },
-
             form: {
                 container: $('.form')
             },
@@ -88,10 +95,18 @@
             });
         }
 
+        /*function _setAdaptivCheckbox(form, check_b, check_c) {
+            form.find(check_b, check_c).on('change', function () {
+                form.find(check_b).not($(this)).removeAttr('checked');
+            });
+        }*/
+
+
         function _getCheckboxes() {
             _setCheckbox(opt.form.container, '.ie');
             _setCheckbox(opt.form.container, '.safari');
             _setCheckbox(opt.form.container, '.iem');
+            _setCheckbox(opt.form.container, '.adaptiv');
         }
 
         function _getBrowsers(device, browser) {
@@ -100,47 +115,37 @@
         }
 
         function _getAdaptiv(form) {
-            if (form.find('.adaptiv' + ':checked').attr('data-adaptiv') == 1) {
-                opt.par.adaptiv = opt.coef.adaptiv.withoutDesign;
-            } else {
-                opt.par.adaptiv = opt.coef.adaptiv.withDesign;
+            var adaptivChoice = form.find('.adaptiv' + ':checked').attr('data-adaptiv') || 0;
+            switch (adaptivChoice) {
+                case "1": opt.par.adaptiv = opt.coef.adaptiv.withoutDesign; break;
+                case "2": opt.par.adaptiv = opt.coef.adaptiv.withDesign; break;
+                default: opt.par.adaptiv = adaptivChoice;
             }
+            console.log(opt.par.adaptiv);
         }
 
         function _getScreens(form) {
-            var boxCheckedQuantity = form.find('.sizeVariant' + ':checked').length;
-            if (form.find('.adaptiv' + ':checked').attr('data-adaptiv') == 1) {
-                opt.par.screens = boxCheckedQuantity * opt.coef.adaptiv.withoutDesign;
-            } else {
-                opt.par.screens = boxCheckedQuantity * opt.coef.adaptiv.widthDesign;
-            }
+            var boxCheckedQuantity = form.find('.sizeVariant' + ':checked').length || 0;
+            console.log(boxCheckedQuantity);
         }
 
         function _getRetina(form) {
             opt.par.retina = 0;
             if (form.find(".retina:checked")) {
-                opt.par.retina = 0.15;
+                opt.par.retina = opt.coef.retina;
             } else {
                 opt.par.retina = 0;
             }
-            console.log(opt.par.retina);
+            //console.log(opt.par.retina);
         }
 
         function _getPrint(form) {
-            /*if(form.find(".printcheck:checked")) {
-             form.find(".invisibleprint").css("visibility","visible");
-             } else
-             {
-             form.find(".invisibleprint").css("visibility","hidden")
-             }*/
-            var pagePrintCalc = form.find('#form9').val();
-            if (pagePrintCalc != '') {
-                parseInt(pagePrintCalc);
-                if (pagePrintCalc == 1) {
-                    opt.par.print = 4;
-                } else {
-                    opt.par.print = 4 + (pagePrintCalc - 1) * 2;
-                }
+            var pagePrintCalc = parseInt(form.find('#form9').val()) || 0;
+            opt.par.print = 0;
+            if (pagePrintCalc === 1) {
+                opt.par.print = opt.const.print.firstPage;
+            } else if (pagePrintCalc > 1) {
+                opt.par.print = opt.const.print.firstPage + ((pagePrintCalc - 1) * opt.const.print.otherPage);
             }
         }
 
@@ -159,7 +164,7 @@
             _getScreens(form);
             _getRetina(form);
             _getPrint(form);
-            console.log(opt.par.print);
+            console.log(opt.par);
         }
 
         function _calcBaseTime() {
@@ -210,7 +215,7 @@
 
             opt.form.activeInput = opt.form.container.find('input').not(':disabled');
             if (opt.form.activeInput.length) {
-                opt.form.activeInput.on('keydown', function () {
+                opt.form.activeInput.on('keyup', function () {
                     calc();
                 });
             }

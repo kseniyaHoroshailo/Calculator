@@ -1,0 +1,17 @@
+.form {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.block {
+    display: -webkit-box;
+}
+table {
+    border: 1px solid black;
+    margin-bottom: 10px;
+    border-spacing: 3px;
+}
+
+.cross {
+    border: 1px solid black;
+    margin-bottom: 10px;
+}

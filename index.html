@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <script src="jquery.min.js"></script>
+    <script src="app.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="form">
+    <div class="row">
+        <div class="col-xs-12">
+            <form id="form-validation" method="post" action="/" class="form-horizontal">
+                <fieldset class="fieldset">
+                    <!-- row-->
+                    <div class="form-group control-group">
+                        <div class="block">
+                            <label for="form1" class="step1">встреча по проекту</label>
+                            <input id="form1" type="text" value="1" disabled>
+                        </div>
+                        <div class="block">
+                            <label for="form2">Количество страниц верстки</label>
+                            <input id="form2" type="text" name="form2" maxlength="50"
+                                   value="2" class="pages">
+                        </div>
+                        <div class="block">
+                            <label for="form3" class="hovers">Количество часов верстки</label>
+                            <input id="form3" type="text">
+                        </div>
+                        <div class="block">
+                            <label for="form4" class="decompo">Составление декомпозиции</label>
+                            <input id="form4" type="text" disabled>
+                        </div>
+                        <div class="block">
+                            <label for="form5" class="create">Создание и настройка структуры проекта</label>
+                            <input id="form5" type="text" value="0.5" disabled>
+                        </div>
+                        <div class="block">
+                            <label for="form6" class="test">Тестирование</label>
+                            <input id="form6" type="text" disabled>
+                        </div>
+                        <div class="block">
+                            <label for="form7" class="unname">Передача верстки менеджеру</label>
+                            <input id="form7" type="text" value="0" disabled>
+                        </div>
+                        <div class="block">
+                            <label for="form8" class="stat">Подведение статистики</label>
+                            <input id="form8" type="text" disabled>
+                        </div>
+                    </div>
+                    <p>Кроссбраузерность</p>
+                    <div class="cross">
+                        <form class="crossbrows">
+                            <span>Desktop</span>
+                            <div class="desktop">
+                                <table>
+                                    <thead>
+                                    <td></td>
+                                    <td><input id="col1" name="desktop" class="crossbrows chrome" type="radio"
+                                               data-coef="c1"></td>
+                                    <td><input id="col2" name="desktop" class="crossbrows chrome" type="radio"
+                                               data-coef="c2"></td>
+                                    <td><input id="col3" name="desktop" class="crossbrows chrome" type="radio"
+                                               data-coef="c3"></td>
+                                    <td><input id="col4" name="desktop" class="crossbrows chrome" type="radio"
+                                               data-coef="c4" checked="checked"></td>
+                                    </thead>
+                                    <tr>
+                                        <td>Chrome</td>
+                                        <td><label for="col1"></label></td>
+                                        <td>
+                                            <label for="col2">20+</label>
+                                        </td>
+                                        <td>
+                                            <label for="col3">30+</label>
+                                        </td>
+                                        <td>
+                                            <label for="col4">last</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Firefox</td>
+                                        <td>
+                                            <label for="col1">4</label>
+                                        </td>
+                                        <td>
+                                            <label for="col2">16</label>
+                                        </td>
+                                        <td>
+                                            <label for="col3">25+</label>
+                                        </td>
+                                        <td>
+                                            <label for="col4">last</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Opera</td>
+                                        <td>
+                                            <label for="col1">10</label>
+                                        </td>
+                                        <td>
+                                            <label for="col2">12</label>
+                                        </td>
+                                        <td>
+                                            <label for="col3">16</label>
+                                        </td>
+                                        <td>
+                                            <label for="col4">last</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <table>
+                                <tr>
+                                    <td>Internet Explorer</td>
+                                    <td>
+                                        <label>
+                                            <input class="crossbrows ie" type="checkbox" data-coef="ie7">
+                                            7
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input class="crossbrows ie" type="checkbox" data-coef="ie8">
+                                            8
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input class="crossbrows ie" type="checkbox" data-coef="ie9">
+                                            9
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input class="crossbrows ie" type="checkbox" data-coef="ie10">
+                                            10
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input class="crossbrows ie" type="checkbox" data-coef="ie11">
+                                            11
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td>Safari</td>
+                                    <td>
+                                        <input class="crossbrows safari" id="safari5" type="checkbox">
+                                        <label for="safari5">5</label>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <input class="crossbrows safari" id="safari6" type="checkbox">
+                                        <label for="safari6">6</label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <span>Mobile</span>
+                            <div class="mobile">
+                                <table>
+                                    <td>Android brouzer</td>
+                                    <td>
+                                        <label>
+                                            <input class="crossbrows android4" data-coef="android4" type="checkbox">
+                                            4.2</label>
+                                    </td>
+                                </table>
+                                <table>
+                                    <td>Internet explorer mobile</td>
+                                    <td>
+                                        <label>
+                                            <input class="crossbrows iem" data-coef="ie10" type="checkbox">
+                                            10</label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input class="crossbrows iem" data-coef="ie11" type="checkbox">
+                                            11</label>
+                                    </td>
+                                </table>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td><input id="mobile1" class="crossbrows chrome_m" data-coef="c1" name="mobile"
+                                                   type="radio"></td>
+                                        <td><input id="mobile2" class="crossbrows chrome_m" data-coef="c2" name="mobile"
+                                                   type="radio"></td>
+                                        <td><input id="mobile3" class="crossbrows chrome_m" data-coef="c3" name="mobile"
+                                                   type="radio"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chrome mobile</td>
+                                        <td>
+                                            <label for="mobile1">последняя-5</label>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <label for="mobile3">last</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Firefox mobile</td>
+                                        <td>
+                                            <label for="mobile1">последняя-5</label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Safari mobile</td>
+                                        <td>
+                                            <label for="mobile1">последняя-2</label>
+                                        </td>
+                                        <td>
+                                            <label for="mobile2">ios7</label>
+                                        </td>
+                                        <td>
+                                            <label for="mobile3">ios9</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="alladaptiv"><label>
+                        <h4>Адаптив</h4>
+                        <input class="adaptiv" type="radio" name="adaptiv" data-adaptiv="1">
+                        адаптив без дизайна</label>
+                        <label>
+                            <input class="adaptiv" type="radio" name="adaptiv" data-adaptiv="2">
+                            адаптив по дизайну</label><br>
+                    </div>
+                    <h4> Разрешения экранов</h4><br>
+                    <div class="size">
+                        <table>
+                            <td>
+                                <div>
+                                    <div class="block">
+                                        <label>
+                                            <input class="sizeVariant" type="checkbox">
+                                            1280 и более fix</label>
+                                    </div>
+                            </td>
+                            <td>
+                                <div class="block">
+                                    <label>
+                                        <input class="sizeVariant" type="checkbox">
+                                        1024-1279 fix</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <label>
+                                        <input class="sizeVariant" type="checkbox">
+                                        768-1023 fix</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="block">
+                                    <label>
+                                        <input class="sizeVariant" type="checkbox">
+                                        320-767 резина</label>
+                                </div>
+                            </td>
+                        </table>
+                    </div>
+                    <span>
+                          <label>
+                              <input class="retina" type="checkbox">
+                              ретина</label>
+                    </span><br>
+                    <span>
+                          <label>
+                              <input class="printcheck" type="checkbox">
+                              версия для печати</label>
+                    </span><br>
+                    <div class="invisibleprint" style="visibility:visible">
+                        <label>Количество страниц для печати
+                            <input id="form9" type="text">
+                        </label>
+                    </div>
+                    <span>
+                        <input id="form10" type="checkbox">
+                                    <label for="form10">есть сложный js</label>
+                        <table>
+                            <tr>
+                                <td>Простой js: слайдеры, табы,аккордеон.....</td>
+                            </tr>
+                        </table>
+                    </span><br>
+                    <span>
+                        <input id="form11" type="checkbox">
+                                    <label for="form11">хочу быстрее</label>
+                    </span><br>
+                    <div class="invisible">
+                        <div class="block">
+                            <label for="form-DAY-1" class="name label-pt">Сегодняшняя
+                                дата</label>
+                            <input id="form-DAY-1" type="date" name="form-DAY-1" spellcheck="true" value="" required=""
+                                   class="form-DAY form-control"><span class="icon datepickerbutton"><span
+                                class="ic-calendar"></span></span>
+                        </div>
+                        <div class="block">
+                            <label for="form-DAY-2" class="name label-pt">Дата окончания
+                                верстки</label>
+                            <input id="form-DAY-2" type="date" name="form-DAY-1" spellcheck="true" value="" required=""
+                                   class="form-DAY form-control"><span class="icon datepickerbutton"><span
+                                class="ic-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <form name="com">
+                            <label>сложность проекта</label>
+                            <select id="complexity" name="mySelect" size="1" multiple disabled>
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="sum">
+                        <label>Итоговое время вёрстки</label>
+                        <input id="form12" type="text" disabled>
+                    </div>
+                </fieldset>
+        </div>
+    </div>
+</div>
+</body>
+</html>

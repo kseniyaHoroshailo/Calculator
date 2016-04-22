@@ -7,9 +7,9 @@
                 deault: {
                     adaptivblock: {
                         adaptiv: 'checked',
-                        movePrototype: {
-                            hasPrototype: {},
-                            hasNotPrototype: 'checked'
+                        rebuildView: {
+                            hasView: {},
+                            hasNotView: 'checked'
                         },
                         //Screens
                         screens: {
@@ -71,9 +71,9 @@
                 //Adaptiv
                 adaptivblock: {
                     adaptiv: .2,
-                    movePrototype: {
-                        hasPrototype: .25,
-                        hasNotPrototype: .1
+                    rebuildView: {
+                        hasView: .25,
+                        hasNotView: .1
                     },
                     //Screens
                     screens: {
@@ -98,7 +98,7 @@
                 retina: .15,
                 hardJs: .1,
                 deadLine: {
-                    fast:.07
+                    fast: .07
                 }
             },
             const: {
@@ -125,7 +125,7 @@
                 },
                 adaptivblock: {
                     adaptiv: {},
-                    movePrototype: {},
+                    rebuildView: {},
                     screens: {
                         lg: {},
                         md: {},
@@ -189,9 +189,9 @@
             opt.par.crossbrowser[device][browser] = opt.coef[device][browser][colCheckedCoef] || 0;
         }
 
-        function _getProtitype() {
+        function _getPrototype() {
             var variant = opt.form.container.find('.adaptiv:checked').data('adaptiv');
-            opt.par.adaptivblock.movePrototype = opt.coef.adaptivblock.movePrototype[variant] || 0;
+            opt.par.adaptivblock.rebuildView = opt.coef.adaptivblock.rebuildView[variant] || 0;
         }
 
         function _getScreens(screen) {
@@ -200,10 +200,20 @@
         }
 
         function _getSimplePar(form, idIs, parametr) {
-            opt.par[parametr] = 0;
             if (form.find('#' + idIs + ':checked')) {
                 opt.par[parametr] = opt.coef[parametr];
-            } else {
+            }
+            else {
+                opt.par[parametr] = 0;
+            }
+        }
+
+
+        function _getSimplePar2(form, idIs, parametr, parametr2) {
+            if (form.find('#' + idIs + ':checked')) {
+                opt.par[parametr] = opt.coef[parametr][parametr2];
+            }
+            else {
                 opt.par[parametr] = 0;
             }
         }
@@ -228,9 +238,9 @@
                 if (day < 10) day = '0' + day;
                 var year = opt.par.deadLine.firstDay.getFullYear();
                 form.find('#datapicker1').val(year + '-' + month + '-' + day);
-                opt.par.deadLine.lastDay = new Date(form.find('#datapicker2').val())  || 0;
+                opt.par.deadLine.lastDay = new Date(form.find('#datapicker2').val()) || 0;
                 opt.par.deadLine.fast = opt.coef.deadLine.fast;
-                console.log(opt.par.deadLine.lastDay);
+                opt.par.deadLine.firstDay = opt.par.deadLine.firstDay.getTime();
             } else {
                 opt.par.deadLine.fast = 0;
             }
@@ -247,15 +257,15 @@
             _getBrowsers('mobile', 'android4');
             _getBrowsers('mobile', 'iem');
             _getBrowsers('mobile', 'chrome_m');
-            _getProtitype();
+            _getPrototype();
             _getScreens('lg');
             _getScreens('md');
             _getScreens('sm');
             _getScreens('xs');
             _getPrint(form);
-            _getSimplePar(form, 'retina', 'retina');
-            _getSimplePar(form, 'form10', 'hardJs');
-            _getSimplePar(form, 'adaptivhead', 'adaptivblock.adaptiv');
+            _getSimplePar(form, 'retina', 'retina', false);
+            _getSimplePar(form, 'form10', 'hardJs', false);
+            _getSimplePar2(form, 'adaptivhead', 'adaptivblock', 'adaptiv');
             _getDeadLine(form);
             console.log(opt.par);
         }

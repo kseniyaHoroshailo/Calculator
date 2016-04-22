@@ -95,16 +95,17 @@
                         }
                     }
                 },
-                //Retina
                 retina: .15,
                 hardJs: .1,
-                deadLine: 0.2
+                deadLine: {
+                    fast:.07
+                }
             },
             const: {
                 print: {
                     firstPage: 4,
                     otherPage: 2
-                },
+                }
             },
             form: {
                 container: $('.form')
@@ -135,7 +136,11 @@
                 retina: {},
                 print: {},
                 hardJs: {},
-                deadLine: {}
+                deadLine: {
+                    firstDay: {},
+                    lastDay: {},
+                    fast: {}
+                }
             }
             /*independ: {},
              depend: {},
@@ -144,16 +149,6 @@
              level3: {},
              sum: {}*/
         };
-
-        function _getData(form) {
-            var dt = new Date();
-            var month = dt.getMonth() + 1;
-            if (month < 10) month = '0' + month;
-            var day = dt.getDate();
-            if (day < 10) day = '0' + day;
-            var year = dt.getFullYear();
-            form.find('#datapicker1').val(day + '-' + month + '-' + year);
-        }
 
         function _setCheckbox(form, check_b) {
             form.find(check_b).on('change', function () {
@@ -224,7 +219,21 @@
         }
 
         function _getDeadLine(form) {
-
+            opt.par.deadLine.fast = 0;
+            if (form.find("#form11:checked")) {
+                opt.par.deadLine.firstDay = new Date();
+                var month = opt.par.deadLine.firstDay.getMonth() + 1;
+                if (month < 10) month = '0' + month;
+                var day = opt.par.deadLine.firstDay.getDate();
+                if (day < 10) day = '0' + day;
+                var year = opt.par.deadLine.firstDay.getFullYear();
+                form.find('#datapicker1').val(year + '-' + month + '-' + day);
+                opt.par.deadLine.lastDay = new Date(form.find('#datapicker2').val())  || 0;
+                opt.par.deadLine.fast = opt.coef.deadLine.fast;
+                console.log(opt.par.deadLine.lastDay);
+            } else {
+                opt.par.deadLine.fast = 0;
+            }
         }
 
         function _getParams(form) {
@@ -293,7 +302,6 @@
         }
 
         if (opt.form.container.length) {
-            _getData(opt.form.container);
             opt.form.container.on('change', function () {
                 _adaptivShowOrHide(".adaptivhead", ".adaptiv");
                 calc();

@@ -42,26 +42,27 @@
                     }
                 },
                 //Adaptiv
-                adaptiv: {
+                adaptivblock: {
+                    adaptiv: {},
                     movePrototype: {
                         hasPrototype: .25,
                         hasNotPrototype: .1
                     },
                     //Screens
                     screens: {
-                        md: {
-                            fix: .02,
-                            fluid: .04
-                        },
                         lg: {
                             fix: .02,
                             fluid: .04
                         },
-                        xs: {
+                        md: {
                             fix: .02,
                             fluid: .04
                         },
-                        xxs: {
+                        sm: {
+                            fix: .02,
+                            fluid: .04
+                        },
+                        xs: {
                             fix: .02,
                             fluid: .04
                         }
@@ -92,13 +93,14 @@
                         chrome: {}
                     }
                 },
-                adaptiv: {
+                adaptivblock: {
+                    adaptiv: {},
                     movePrototype: {},
                     screens: {
-                        md: {},
                         lg: {},
-                        xs: {},
-                        xxs: {}
+                        md: {},
+                        sm: {},
+                        xs: {}
                     }
                 },
                 retina: {},
@@ -138,9 +140,9 @@
             _setCheckbox(opt.form.container, '.safari');
             _setCheckbox(opt.form.container, '.iem');
             _setCheckbox(opt.form.container, '.adaptiv');
-            _setCheckbox(opt.form.container, '.md');
             _setCheckbox(opt.form.container, '.lg');
-            _setCheckbox(opt.form.container, '.xs');
+            _setCheckbox(opt.form.container, '.md');
+            _setCheckbox(opt.form.container, '.sm');
         }
 
         function _getBrowsers(device, browser) {
@@ -148,14 +150,23 @@
             opt.par.crossbrowser[device][browser] = opt.coef[device][browser][colCheckedCoef] || 0;
         }
 
+        function _getAdaptiv(form) {
+            opt.par.adaptivblock.adaptiv = 0;
+            if(form.find(".adaptivhead:checked")) {
+                opt.par.adaptivblock.adaptiv = 1;
+            } else {
+                opt.par.adaptivblock.adaptiv = 0;
+            }
+        }
+
         function _getProtitype() {
             var variant = opt.form.container.find('.adaptiv:checked').data('adaptiv');
-            opt.par.adaptiv.movePrototype = opt.coef.adaptiv.movePrototype[variant] || 0;
+            opt.par.adaptivblock.movePrototype = opt.coef.adaptivblock.movePrototype[variant] || 0;
         }
 
         function _getScreens(screen) {
             var rowCheckedCoef = opt.form.container.find('.' + screen + ':checked').data('screen');
-            opt.par.adaptiv.screens[screen] = opt.coef.adaptiv.screens[screen][rowCheckedCoef] || 0;
+            opt.par.adaptivblock.screens[screen] = opt.coef.adaptivblock.screens[screen][rowCheckedCoef] || 0;
         }
 
         function _getRetina(form) {
@@ -189,14 +200,15 @@
             _getBrowsers('mobile', 'android4');
             _getBrowsers('mobile', 'iem');
             _getBrowsers('mobile', 'chrome_m');
+            _getAdaptiv(form);
             _getProtitype();
-            _getScreens('md');
             _getScreens('lg');
+            _getScreens('md');
+            _getScreens('sm');
             _getScreens('xs');
-            _getScreens('xxs');
             _getRetina(form);
             _getPrint(form);
-            console.log(opt.par.adaptiv);
+            console.log(opt.par.adaptivblock);
         }
 
         function _calcBaseTime() {
@@ -242,7 +254,7 @@
 
         if (opt.form.container.length) {
             opt.form.container.on('change', function () {
-                _adaptivShovOrHide(".adaptivhead",".adaptivblock");
+                _adaptivShovOrHide(".adaptivhead",".adaptiv");
                 calc();
             });
 

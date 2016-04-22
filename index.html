@@ -233,7 +233,7 @@
                         <div class="adaptivblock">
                             <label>
                                 <input class="adaptiv" type="radio" name="adaptiv"
-                                          data-adaptiv="hasNotPrototype">
+                                       data-adaptiv="hasNotPrototype">
                                 нет прототипов перестроения</label><br>
                             <label>
                                 <input class="adaptiv" type="radio" name="adaptiv" data-adaptiv="hasPrototype">
@@ -241,12 +241,13 @@
                             <hr>
                             <h4>Точки перестроения блоков</h4><br>
                             <div class="size">
-                                <table><thead>
+                                <table>
+                                    <thead>
                                     <td></td>
                                     <td>fix</td>
                                     <td>fluid</td>
                                     <td></td>
-                                </thead>
+                                    </thead>
                                     <tr>
                                         <td>>=1280</td>
                                         <td><input class="lg" type="radio" data-screen="fix"></td>
@@ -268,7 +269,7 @@
                                     <tr>
                                         <td>320-767</td>
                                         <td><input class="xs" type="radio" disabled></td>
-                                        <td><input class="xs" type="radio"  data-screen="fluid"></td>
+                                        <td><input class="xs" type="radio" data-screen="fluid"></td>
                                         <td>Mobile</td>
                                     </tr>
                                 </table>
@@ -277,7 +278,7 @@
                     </div>
                     <span>
                           <label>
-                              <input class="retina" type="checkbox">
+                              <input id="retina" type="checkbox">
                               ретина</label>
                     </span><br>
                     <div class="invisibleprint" style="visibility:visible">
@@ -286,8 +287,9 @@
                         </label>
                     </div>
                     <span>
-                        <input id="form10" type="checkbox">
-                                    <label for="form10">есть сложный js</label>
+                         <label>
+                             <input id="form10" type="checkbox">
+                             есть сложный js</label>
                         <table>
                             <tr>
                                 <td>Простой js: слайдеры, табы,аккордеон.....</td>
@@ -299,20 +301,11 @@
                                     <label for="form11">хочу быстрее</label>
                     </span><br>
                     <div class="invisible">
-                        <div class="block">
-                            <label for="form-DAY-1" class="name label-pt">Сегодняшняя
-                                дата</label>
-                            <input id="form-DAY-1" type="date" name="form-DAY-1" spellcheck="true" value="" required=""
-                                   class="form-DAY form-control"><span class="icon datepickerbutton"><span
-                                class="ic-calendar"></span></span>
-                        </div>
-                        <div class="block">
-                            <label for="form-DAY-2" class="name label-pt">Дата окончания
-                                верстки</label>
-                            <input id="form-DAY-2" type="date" name="form-DAY-1" spellcheck="true" value="" required=""
-                                   class="form-DAY form-control"><span class="icon datepickerbutton"><span
-                                class="ic-calendar"></span></span>
-                        </div>
+                        <label>Сегодняшняя
+                            дата <input id="datapicker1" type="data" disabled><span class="icon datepickerbutton"><span
+                                    class="ic-calendar"></span></span></label><br>
+                        <label>Дата окончания верстки <input id="datapicker2" type="data"><span class="icon datepickerbutton"><span
+                                    class="ic-calendar"></span></span></label>
                     </div>
                     <div class="block">
                         <form name="com">

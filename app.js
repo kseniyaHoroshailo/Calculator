@@ -4,7 +4,34 @@
         var opt = {
             //browsers coefficients
             coef: {
-                deault: {},
+                deault: {
+                    adaptivblock: {
+                        adaptiv: 'checked',
+                        movePrototype: {
+                            hasPrototype: {},
+                            hasNotPrototype: 'checked'
+                        },
+                        //Screens
+                        screens: {
+                            lg: {
+                                fix: 'checked',
+                                fluid: {}
+                            },
+                            md: {
+                                fix: 'checked',
+                                fluid: {}
+                            },
+                            sm: {
+                                fix: 'checked',
+                                fluid: {}
+                            },
+                            xs: {
+                                fix: 'checked',
+                                fluid: {}
+                            }
+                        }
+                    }
+                },
                 // Desktop
                 desktop: {
 
@@ -43,7 +70,7 @@
                 },
                 //Adaptiv
                 adaptivblock: {
-                    adaptiv: {},
+                    adaptiv: .2,
                     movePrototype: {
                         hasPrototype: .25,
                         hasNotPrototype: .1
@@ -69,13 +96,15 @@
                     }
                 },
                 //Retina
-                retina: .15
+                retina: .15,
+                hardJs: .1,
+                deadLine: 0.2
             },
             const: {
                 print: {
                     firstPage: 4,
                     otherPage: 2
-                }
+                },
             },
             form: {
                 container: $('.form')
@@ -104,7 +133,9 @@
                     }
                 },
                 retina: {},
-                print: {}
+                print: {},
+                hardJs: {},
+                deadLine: {}
             }
             /*independ: {},
              depend: {},
@@ -114,6 +145,15 @@
              sum: {}*/
         };
 
+        function _getData(form) {
+            var dt = new Date();
+            var month = dt.getMonth() + 1;
+            if (month < 10) month = '0' + month;
+            var day = dt.getDate();
+            if (day < 10) day = '0' + day;
+            var year = dt.getFullYear();
+            form.find('#datapicker1').val(day + '-' + month + '-' + year);
+        }
 
         function _setCheckbox(form, check_b) {
             form.find(check_b).on('change', function () {
@@ -121,19 +161,23 @@
             });
         }
 
-        function _adaptivShovOrHide(boxClass,classIs) {
+        /*function _setRadio(form, classIs, data) {
+         var rowCheckedRadio = opt.form.coef.deault.find(':checked');
+         rowCheckedRadio.attr("checked", "checked");
+         }*/
+
+        function _adaptivShowOrHide(boxClass, classIs) {
             $(boxClass).fadeOut();
             $(boxClass).on('click',
-                function() {
+                function () {
                     alert(boxClass);
-                if ($(boxClass).attr('checked:checked')) {
-                    $(classIs).fadeIn();
-                } else {
-                    $(classIs).fadeOut();
-                }
-            });
+                    if ($(boxClass).attr('checked:checked')) {
+                        $(classIs).fadeIn();
+                    } else {
+                        $(classIs).fadeOut();
+                    }
+                });
         }
-
 
         function _getCheckboxes() {
             _setCheckbox(opt.form.container, '.ie');
@@ -150,15 +194,6 @@
             opt.par.crossbrowser[device][browser] = opt.coef[device][browser][colCheckedCoef] || 0;
         }
 
-        function _getAdaptiv(form) {
-            opt.par.adaptivblock.adaptiv = 0;
-            if(form.find(".adaptivhead:checked")) {
-                opt.par.adaptivblock.adaptiv = 1;
-            } else {
-                opt.par.adaptivblock.adaptiv = 0;
-            }
-        }
-
         function _getProtitype() {
             var variant = opt.form.container.find('.adaptiv:checked').data('adaptiv');
             opt.par.adaptivblock.movePrototype = opt.coef.adaptivblock.movePrototype[variant] || 0;
@@ -169,14 +204,13 @@
             opt.par.adaptivblock.screens[screen] = opt.coef.adaptivblock.screens[screen][rowCheckedCoef] || 0;
         }
 
-        function _getRetina(form) {
-            opt.par.retina = 0;
-            if (form.find(".retina:checked")) {
-                opt.par.retina = opt.coef.retina;
+        function _getSimplePar(form, idIs, parametr) {
+            opt.par[parametr] = 0;
+            if (form.find('#' + idIs + ':checked')) {
+                opt.par[parametr] = opt.coef[parametr];
             } else {
-                opt.par.retina = 0;
+                opt.par[parametr] = 0;
             }
-            //console.log(opt.par.retina);
         }
 
         function _getPrint(form) {
@@ -187,6 +221,10 @@
             } else if (pagePrintCalc > 1) {
                 opt.par.print = opt.const.print.firstPage + ((pagePrintCalc - 1) * opt.const.print.otherPage);
             }
+        }
+
+        function _getDeadLine(form) {
+
         }
 
         function _getParams(form) {
@@ -200,15 +238,17 @@
             _getBrowsers('mobile', 'android4');
             _getBrowsers('mobile', 'iem');
             _getBrowsers('mobile', 'chrome_m');
-            _getAdaptiv(form);
             _getProtitype();
             _getScreens('lg');
             _getScreens('md');
             _getScreens('sm');
             _getScreens('xs');
-            _getRetina(form);
             _getPrint(form);
-            console.log(opt.par.adaptivblock);
+            _getSimplePar(form, 'retina', 'retina');
+            _getSimplePar(form, 'form10', 'hardJs');
+            _getSimplePar(form, 'adaptivhead', 'adaptivblock.adaptiv');
+            _getDeadLine(form);
+            console.log(opt.par);
         }
 
         function _calcBaseTime() {
@@ -253,8 +293,9 @@
         }
 
         if (opt.form.container.length) {
+            _getData(opt.form.container);
             opt.form.container.on('change', function () {
-                _adaptivShovOrHide(".adaptivhead",".adaptiv");
+                _adaptivShowOrHide(".adaptivhead", ".adaptiv");
                 calc();
             });
 

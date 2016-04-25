@@ -69,8 +69,8 @@
                     }
                 },
                 //Adaptiv
+                adaptiv: .2,
                 adaptivblock: {
-                    adaptiv: .2,
                     rebuildView: {
                         hasView: .25,
                         hasNotView: .1
@@ -123,8 +123,8 @@
                         chrome: {}
                     }
                 },
+                adaptiv: {},
                 adaptivblock: {
-                    adaptiv: {},
                     rebuildView: {},
                     screens: {
                         lg: {},
@@ -208,16 +208,6 @@
             }
         }
 
-
-        function _getSimplePar2(form, idIs, parametr, parametr2) {
-            if (form.find('#' + idIs + ':checked')) {
-                opt.par[parametr] = opt.coef[parametr][parametr2];
-            }
-            else {
-                opt.par[parametr] = 0;
-            }
-        }
-
         function _getPrint(form) {
             var pagePrintCalc = parseInt(form.find('#form9').val()) || 0;
             opt.par.print = 0;
@@ -241,6 +231,7 @@
                 opt.par.deadLine.lastDay = new Date(form.find('#datapicker2').val()) || 0;
                 opt.par.deadLine.fast = opt.coef.deadLine.fast;
                 opt.par.deadLine.firstDay = opt.par.deadLine.firstDay.getTime();
+                opt.par.deadLine.lastDay = opt.par.deadLine.lastDay.getTime();
             } else {
                 opt.par.deadLine.fast = 0;
             }
@@ -263,9 +254,9 @@
             _getScreens('sm');
             _getScreens('xs');
             _getPrint(form);
-            _getSimplePar(form, 'retina', 'retina', false);
-            _getSimplePar(form, 'form10', 'hardJs', false);
-            _getSimplePar2(form, 'adaptivhead', 'adaptivblock', 'adaptiv');
+            _getSimplePar(form, 'retina', 'retina');
+            _getSimplePar(form, 'form10', 'hardJs');
+            _getSimplePar(form, 'adaptivhead', 'adaptiv');
             _getDeadLine(form);
             console.log(opt.par);
         }

@@ -4,34 +4,6 @@
         var opt = {
             //browsers coefficients
             coef: {
-                deault: {
-                    adaptivblock: {
-                        adaptiv: 'checked',
-                        rebuildView: {
-                            hasView: {},
-                            hasNotView: 'checked'
-                        },
-                        //Screens
-                        screens: {
-                            lg: {
-                                fix: 'checked',
-                                fluid: {}
-                            },
-                            md: {
-                                fix: 'checked',
-                                fluid: {}
-                            },
-                            sm: {
-                                fix: 'checked',
-                                fluid: {}
-                            },
-                            xs: {
-                                fix: 'checked',
-                                fluid: {}
-                            }
-                        }
-                    }
-                },
                 // Desktop
                 desktop: {
 
@@ -64,8 +36,7 @@
                     },
                     chrome_m: {                   //Chrome, Firefox, Safari
                         c1: .07,
-                        c2: .03,
-                        c3: 0
+                        c2: 0
                     }
                 },
                 //Adaptiv
@@ -102,6 +73,9 @@
                 }
             },
             const: {
+                vstrecha: 1,
+                initProject: .5,
+                transferManager: 0,
                 print: {
                     firstPage: 4,
                     otherPage: 2
@@ -110,7 +84,7 @@
             form: {
                 container: $('.form')
             },
-            par: {
+            params: {
                 crossbrowser: {
                     desktop: {
                         chrome: {},
@@ -156,22 +130,9 @@
             });
         }
 
-        /*function _setRadio(form, classIs, data) {
-         var rowCheckedRadio = opt.form.coef.deault.find(':checked');
-         rowCheckedRadio.attr("checked", "checked");
-         }*/
-
-        function _adaptivShowOrHide(boxClass, classIs) {
-            $(boxClass).fadeOut();
-            $(boxClass).on('click',
-                function () {
-                    alert(boxClass);
-                    if ($(boxClass).attr('checked:checked')) {
-                        $(classIs).fadeIn();
-                    } else {
-                        $(classIs).fadeOut();
-                    }
-                });
+        function _setCheckboxes(form, classIs) {
+            var box = form.find('.' + classIs);
+            box.attr('checked', 'checked');
         }
 
         function _getCheckboxes() {
@@ -186,62 +147,96 @@
 
         function _getBrowsers(device, browser) {
             var colCheckedCoef = opt.form.container.find('.' + browser + ':checked').data('coef');
-            opt.par.crossbrowser[device][browser] = opt.coef[device][browser][colCheckedCoef] || 0;
+            opt.params.crossbrowser[device][browser] = opt.coef[device][browser][colCheckedCoef] || 0;
         }
 
         function _getPrototype() {
             var variant = opt.form.container.find('.adaptiv:checked').data('adaptiv');
-            opt.par.adaptivblock.rebuildView = opt.coef.adaptivblock.rebuildView[variant] || 0;
+            opt.params.adaptivblock.rebuildView = opt.coef.adaptivblock.rebuildView[variant] || 0;
         }
 
         function _getScreens(screen) {
             var rowCheckedCoef = opt.form.container.find('.' + screen + ':checked').data('screen');
-            opt.par.adaptivblock.screens[screen] = opt.coef.adaptivblock.screens[screen][rowCheckedCoef] || 0;
+            opt.params.adaptivblock.screens[screen] = opt.coef.adaptivblock.screens[screen][rowCheckedCoef] || 0;
         }
 
         function _getSimplePar(form, idIs, parametr) {
+            opt.params[parametr] = 0;
             if (form.find('#' + idIs + ':checked')) {
-                opt.par[parametr] = opt.coef[parametr];
-            }
-            else {
-                opt.par[parametr] = 0;
+                opt.params[parametr] = opt.coef[parametr];
             }
         }
 
         function _getPrint(form) {
-            var pagePrintCalc = parseInt(form.find('#form9').val()) || 0;
-            opt.par.print = 0;
-            if (pagePrintCalc === 1) {
-                opt.par.print = opt.const.print.firstPage;
-            } else if (pagePrintCalc > 1) {
-                opt.par.print = opt.const.print.firstPage + ((pagePrintCalc - 1) * opt.const.print.otherPage);
+            opt.params.print = parseInt(form.find('#form9').val()) || 0;
+            if (opt.params.print === 1) {
+                opt.params.print = opt.const.print.firstPage;
+            } else if (opt.params.print > 1) {
+                opt.params.print = opt.const.print.firstPage + ((opt.params.print - 1) * opt.const.print.otherPage);
             }
         }
 
         function _getDeadLine(form) {
-            opt.par.deadLine.fast = 0;
+            opt.params.deadLine.fast = 0;
             if (form.find("#form11:checked")) {
-                opt.par.deadLine.firstDay = new Date();
-                var month = opt.par.deadLine.firstDay.getMonth() + 1;
-                if (month < 10) month = '0' + month;
-                var day = opt.par.deadLine.firstDay.getDate();
-                if (day < 10) day = '0' + day;
-                var year = opt.par.deadLine.firstDay.getFullYear();
-                form.find('#datapicker1').val(year + '-' + month + '-' + day);
-                opt.par.deadLine.lastDay = new Date(form.find('#datapicker2').val()) || 0;
-                opt.par.deadLine.fast = opt.coef.deadLine.fast;
-                opt.par.deadLine.firstDay = opt.par.deadLine.firstDay.getTime();
-                opt.par.deadLine.lastDay = opt.par.deadLine.lastDay.getTime();
-            } else {
-                opt.par.deadLine.fast = 0;
+                opt.params.deadLine.firstDay = new Date(form.find('#datapicker1').val());
+                opt.params.deadLine.lastDay = new Date(form.find('#datapicker2').val()) || 0;
+                opt.params.deadLine.fast = opt.coef.deadLine.fast;
+                opt.params.deadLine.firstDay = opt.params.deadLine.firstDay.getTime();
+                opt.params.deadLine.lastDay = opt.params.deadLine.lastDay.getTime() || 0;
             }
         }
 
+        function _setStartParams(form) {
+            opt.params.vstrecha = form.find('#form1').val(opt.const.vstrecha);
+            opt.params.initProject = form.find('#form5').val(opt.const.initProject);
+            opt.params.transferManager = form.find('#form7').val(opt.const.transferManager);
+            _setCheckboxes(opt.form.container, 'col4');
+            _setCheckboxes(opt.form.container, 'chrome_m2');
+            opt.params.deadLine.firstDay = new Date();
+            var month = opt.params.deadLine.firstDay.getMonth() + 1;
+            if (month < 10) {
+                month = '0' + month;
+            }
+            var day = opt.params.deadLine.firstDay.getDate();
+            if (day < 10) {
+                day = '0' + day;
+            }
+            var year = opt.params.deadLine.firstDay.getFullYear();
+            form.find('#datapicker1').val(year + '-' + month + '-' + day);
+            //adaptiv
+            //form.find('#adaptivhead').attr('checked', true);
+            //form.find('.adaptiv1').attr('checked', 'checked');
+            //print
+            form.find('#form9').attr('disabled', 'disabled');
+        }
+
+        function _setParams(form) {
+            opt.params.quantityPages = parseFloat(form.find('#form2').val()) || 0;
+            opt.params.quantityHours = parseFloat(form.find('#form3').val()) || 0;
+            //adaptiv
+            form.find('#adaptivhead').on('change', function () {
+                if (form.find('#adaptivhead').prop('checked')) {
+                    form.find('.adaptiv1').prop('checked');
+                    form.find('.adaptiv').removeAttr('disabled');
+                } else {
+                    form.find('.adaptiv').removeAttr('checked');
+                    form.find('.adaptiv').attr('disabled','disabled');
+                }
+            });
+            //print
+            if (form.find('.printbox').prop('checked')) {
+                form.find('#form9').removeAttr('disabled');
+                form.find('#form9').val('');
+            } else {
+                form.find('#form9').attr('disabled', 'disabled');
+                form.find('#form9').val(0);
+            }
+            //hardPoject
+
+        }
+
         function _getParams(form) {
-            opt.par.vstrecha = parseFloat(form.find('#form1').val());
-            opt.par.initProject = parseFloat(form.find('#form5').val());
-            opt.par.quantityPages = parseFloat(form.find('#form2').val()) || 0;
-            opt.par.quantityHours = parseFloat(form.find('#form3').val()) || 0;
             _getBrowsers('desktop', 'chrome');
             _getBrowsers('desktop', 'ie');
             _getBrowsers('desktop', 'safari');
@@ -258,40 +253,42 @@
             _getSimplePar(form, 'form10', 'hardJs');
             _getSimplePar(form, 'adaptivhead', 'adaptiv');
             _getDeadLine(form);
-            console.log(opt.par);
+            console.log(opt.params);
         }
 
         function _calcBaseTime() {
-            opt.par.decomposition = opt.par.quantityHours / 30 * 0.5;
-            opt.par.statistic = opt.par.quantityHours / 30 * 0.5;
-            opt.par.testing = opt.par.quantityHours / 21 * 3;
-            opt.par.independ = opt.par.vstrecha + opt.par.initProject + opt.par.decomposition + opt.pat.statistic;
-            opt.par.depend = opt.par.quantityHours + opt.par.testing;
+            opt.params.decomposition = Math.ceil(opt.params.quantityHours / 30) * 0.5;
+            opt.params.statistic = Math.ceil(opt.params.quantityHours / 30) * 0.5;
+            opt.params.testing = Math.ceil(opt.params.quantityHours / 21) * 3;
+            if (opt.params.testing < 2) {
+                opt.params.testing = 2;
+            }
+            $("#form4").val(opt.params.decomposition);
+            $("#form6").val(opt.params.testing);
+            $("#form8").val(opt.params.statistic);
+            opt.params.independ = opt.params.vstrecha + opt.params.initProject + opt.params.decomposition + opt.params.statistic + opt.params.testing;
+            opt.params.depend = opt.params.quantityHours;
         }
 
         function _calcLevel1() {
-            opt.par.level1 = opt.par.depend * (opt.par.crossbrowser.desktop.chrome + opt.par.crossbrowser.desktop.ie + opt.par.crossbrowser.desktop.safari + opt.par.crossbrowser.mobile.android4 + opt.par.crossbrowser.mobile.ie + opt.par.crossbrowser.mobile.chrome);
+            opt.params.level1 = opt.params.depend * (opt.params.crossbrowser.desktop.chrome + opt.params.crossbrowser.desktop.ie + opt.params.crossbrowser.desktop.safari + opt.params.crossbrowser.mobile.android4 + opt.params.crossbrowser.mobile.ie + opt.params.crossbrowser.mobile.chrome);
         }
 
         function _calcLevel2() {
-            opt.par.level2 = opt.par.depend * (opt.par.adaptive + opt.par.adaptivDesine + opt.par.retina + opt.par.print + opt.par.hardJs);
+            opt.params.level2 = opt.params.depend * (opt.params.adaptiv + opt.params.adaptivblock.rebuildView + opt.params.retina + opt.params.print + opt.params.hardJs + opt.params.adaptivblock.screens.lg + opt.params.adaptivblock.screens.md + opt.params.adaptivblock.screens.sm + opt.params.adaptivblock.screens.xs);
         }
 
         function _calcLevel3() {
-            opt.par.level3 = opt.par.depend * (opt.par.quickly + opt.par.difficulty);
+            opt.params.level3 = opt.params.depend * (opt.params.deadLine.fast);
         }
 
         function _calcParams() {
-            // Считаем по большой формуле
-            /*
-             базовоеВремя * уровень1 * уровень2 * ур3
-
-             */
-            opt.par.sum = opt.par.level1 + opt.par.level2 + opt.par.level3 + opt.par.independ;
+            opt.params.sum = opt.params.level1 + opt.params.level2 + opt.params.level3 + opt.params.independ;
 
         }
 
         function calc() {
+            _setParams(opt.form.container);
             _getCheckboxes();
             _getParams(opt.form.container);
             //_calcBaseTime();
@@ -299,12 +296,12 @@
             //_calcLevel2();
             //_calcLevel3();
             //_calcParams();
-            $("#form12").val(opt.par.sum);
+            $("#form12").val(opt.params.sum);
         }
 
         if (opt.form.container.length) {
+            _setStartParams(opt.form.container);
             opt.form.container.on('change', function () {
-                _adaptivShowOrHide(".adaptivhead", ".adaptiv");
                 calc();
             });
 

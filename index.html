@@ -16,37 +16,32 @@
                     <!-- row-->
                     <div class="form-group control-group">
                         <div class="block">
-                            <label for="form1" class="step1">встреча по проекту</label>
-                            <input id="form1" type="text" value="1" disabled>
+                            <label class="step1">встреча по проекту <input id="form1" type="text" disabled>
+                            </label>
+
                         </div>
                         <div class="block">
-                            <label for="form2">Количество страниц верстки</label>
-                            <input id="form2" type="text" name="form2" maxlength="50"
-                                   value="2" class="pages">
+                            <label>Количество страниц верстки <input id="form2" type="text" name="form2" maxlength="50"
+                                                                                 value="" class="pages"></label>
                         </div>
                         <div class="block">
-                            <label for="form3" class="hovers">Количество часов верстки</label>
-                            <input id="form3" type="text">
+                            <label class="hovers">Количество часов верстки <input id="form3" type="text"></label>
+
                         </div>
                         <div class="block">
-                            <label for="form4" class="decompo">Составление декомпозиции</label>
-                            <input id="form4" type="text" disabled>
+                            <label class="decompo">Составление декомпозиции <input id="form4" type="text" disabled></label>
                         </div>
                         <div class="block">
-                            <label for="form5" class="create">Создание и настройка структуры проекта</label>
-                            <input id="form5" type="text" value="0.5" disabled>
+                            <label class="create">Создание и настройка структуры проекта <input id="form5" type="text" disabled></label>
                         </div>
                         <div class="block">
-                            <label for="form6" class="test">Тестирование</label>
-                            <input id="form6" type="text" disabled>
+                            <label class="test">Тестирование  <input id="form6" type="text" disabled></label>
                         </div>
                         <div class="block">
-                            <label for="form7" class="unname">Передача верстки менеджеру</label>
-                            <input id="form7" type="text" value="0" disabled>
+                            <label class="unname">Передача верстки менеджеру <input id="form7" type="text" disabled></label>
                         </div>
                         <div class="block">
-                            <label for="form8" class="stat">Подведение статистики</label>
-                            <input id="form8" type="text" disabled>
+                            <label class="stat">Подведение статистики <input id="form8" type="text" disabled></label>
                         </div>
                     </div>
                     <p>Кроссбраузерность</p>
@@ -63,8 +58,8 @@
                                                data-coef="c2"></td>
                                     <td><input id="col3" name="desktop" class="crossbrows chrome" type="radio"
                                                data-coef="c3"></td>
-                                    <td><input id="col4" name="desktop" class="crossbrows chrome" type="radio"
-                                               data-coef="c4" checked="checked"></td>
+                                    <td><input id="col4" name="desktop" class="crossbrows chrome col4" type="radio"
+                                               data-coef="c4"></td>
                                     </thead>
                                     <tr>
                                         <td>Chrome</td>
@@ -163,7 +158,7 @@
                             <span>Mobile</span>
                             <div class="mobile">
                                 <table>
-                                    <td>Android brouzer</td>
+                                    <td>Android browzer</td>
                                     <td>
                                         <label>
                                             <input class="crossbrows android4" data-coef="android4" type="checkbox">
@@ -186,11 +181,9 @@
                                 <table>
                                     <tr>
                                         <td></td>
-                                        <td><input id="mobile1" class="crossbrows chrome_m" data-coef="c1" name="mobile"
+                                        <td><input id="mobile1" class="crossbrows chrome_m chrome_m1" data-coef="c1" name="mobile"
                                                    type="radio"></td>
-                                        <td><input id="mobile2" class="crossbrows chrome_m" data-coef="c2" name="mobile"
-                                                   type="radio"></td>
-                                        <td><input id="mobile3" class="crossbrows chrome_m" data-coef="c3" name="mobile"
+                                        <td><input id="mobile2" class="crossbrows chrome_m chrome_m2" data-coef="c2" name="mobile"
                                                    type="radio"></td>
                                     </tr>
                                     <tr>
@@ -198,9 +191,8 @@
                                         <td>
                                             <label for="mobile1">последняя-5</label>
                                         </td>
-                                        <td></td>
                                         <td>
-                                            <label for="mobile3">last</label>
+                                            <label for="mobile2">last</label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -213,13 +205,10 @@
                                     <tr>
                                         <td>Safari mobile</td>
                                         <td>
-                                            <label for="mobile1">последняя-2</label>
+                                            <label for="mobile1">ios7</label>
                                         </td>
                                         <td>
-                                            <label for="mobile2">ios7</label>
-                                        </td>
-                                        <td>
-                                            <label for="mobile3">ios9</label>
+                                            <label for="mobile2">ios9</label>
                                         </td>
                                     </tr>
                                 </table>
@@ -227,18 +216,16 @@
                         </form>
                     </div>
 
-                    <div class="alladaptiv"><label>
-                        <h2><label><input type="checkbox" id="adaptivhead">Адаптив</label></h2>
-                        <hr>
+                    <div class="alladaptiv">
+                        <div class="adaptivFirst"><h2><label><input type="checkbox" id="adaptivhead">Адаптив</label></h2>
+                        <label>
+                            <input class="adaptiv adaptiv1" type="radio" name="adaptiv"
+                                   data-adaptiv="hasNotView">
+                            нет прототипов перестроения</label><br>
+                        <label>
+                            <input class="adaptiv adaptiv2" type="radio" name="adaptiv" data-adaptiv="hasView">
+                            есть прототипы перестроения</label><br></div>
                         <div class="adaptivblock">
-                            <label>
-                                <input class="adaptiv" type="radio" name="adaptiv"
-                                       data-adaptiv="hasNotView">
-                                нет прототипов перестроения</label><br>
-                            <label>
-                                <input class="adaptiv" type="radio" name="adaptiv" data-adaptiv="hasView">
-                                есть прототипы перестроения</label><br>
-                            <hr>
                             <h4>Точки перестроения блоков</h4><br>
                             <div class="size">
                                 <table>
@@ -282,6 +269,7 @@
                               ретина</label>
                     </span><br>
                     <div class="invisibleprint" style="visibility:visible">
+                        <label><input type="checkbox" class="printbox">Версия для печати </label><br>
                         <label>Количество страниц для печати
                             <input id="form9" type="text">
                         </label>
@@ -296,30 +284,26 @@
                             </tr>
                         </table>
                     </span><br>
-                    <span>
-                          <label><input id="form11" type="checkbox">хочу быстрее</label>
-                    </span><br>
                     <div class="invisible">
-                        <label class="name label-pt">Сегодняшняя
-                            дата <input id="datapicker1" type="date" disabled name="form-DAY-1" spellcheck="true"
+                        <label class="name label-pt">Дата начала верстки <input id="datapicker1" type="date" name="form-DAY-1" spellcheck="true"
                                         value="" required=""
                                         class="form-DAY form-control"><span class="icon datepickerbutton"><span
                                     class="ic-calendar"></span></span><br>
                             <label class="name label-pt">Дата окончания верстки <input id="datapicker2" type="date" name="form-DAY-1" spellcheck="true" value="" required="" class="form-DAY form-control"></label>
                             <span class="icon datepickerbutton"><span class="ic-calendar"></span></span>
+                            <span><br>
+                          <label><input id="form11" type="checkbox">хочу быстрее</label>
+                    </span><br>
                     </div>
                     <div class="block">
                         <form name="com">
                             <label>сложность проекта</label>
-                            <select id="complexity" name="mySelect" size="1" multiple disabled>
-                                <option selected value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
+                            <input id="complexity" disabled>
+                            </input>
                         </form>
                     </div>
                     <div class="sum">
-                        <label>Итоговое время вёрстки</label>
+                        <label class="sum">Итоговое время вёрстки</label>
                         <input id="form12" type="text" disabled>
                     </div>
                 </fieldset>

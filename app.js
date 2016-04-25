@@ -205,8 +205,7 @@
             var year = opt.params.deadLine.firstDay.getFullYear();
             form.find('#datapicker1').val(year + '-' + month + '-' + day);
             //adaptiv
-            //form.find('#adaptivhead').attr('checked', true);
-            //form.find('.adaptiv1').attr('checked', 'checked');
+            form.find('#adaptivhead').attr('checked','checked');
             //print
             form.find('#form9').attr('disabled', 'disabled');
         }

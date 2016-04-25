@@ -205,7 +205,8 @@
             var year = opt.params.deadLine.firstDay.getFullYear();
             form.find('#datapicker1').val(year + '-' + month + '-' + day);
             //adaptiv
-            form.find('#adaptivhead').attr('checked','checked');
+            form.find('#adaptivhead').attr('checked', 'checked');
+            form.find('.adaptiv1').attr('checked', 'checked');
             //print
             form.find('#form9').attr('disabled', 'disabled');
         }
@@ -220,19 +221,26 @@
                     form.find('.adaptiv').removeAttr('disabled');
                 } else {
                     form.find('.adaptiv').removeAttr('checked');
-                    form.find('.adaptiv').attr('disabled','disabled');
+                    form.find('.adaptiv').attr('disabled', 'disabled');
                 }
             });
             //print
             if (form.find('.printbox').prop('checked')) {
                 form.find('#form9').removeAttr('disabled');
-                form.find('#form9').val('');
             } else {
                 form.find('#form9').attr('disabled', 'disabled');
                 form.find('#form9').val(0);
             }
             //hardPoject
-
+            if(form.find('#form9') <= 4 && form.find('#form10').prop('checked')) {
+                form.find('#complexity').val(1);
+            } else if(form.find('#form9') > 4 && form.find('#form9') <= 10 && !form.find('#form10').prop('checked')) {
+                form.find('#complexity').val(2);
+            } else if(form.find('#form10').prop('checked')){
+                form.find('#complexity').val(3);
+            } else {
+                form.find('#complexity').val(1);
+            }
         }
 
         function _getParams(form) {
@@ -283,7 +291,6 @@
 
         function _calcParams() {
             opt.params.sum = opt.params.level1 + opt.params.level2 + opt.params.level3 + opt.params.independ;
-
         }
 
         function calc() {

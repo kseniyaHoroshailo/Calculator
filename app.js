@@ -93,8 +93,8 @@
                     },
                     mobile: {
                         android4: {},
-                        ie: {},
-                        chrome: {}
+                        iem: {},
+                        chrome_m: {}
                     }
                 },
                 adaptiv: {},
@@ -115,13 +115,13 @@
                     lastDay: {},
                     fast: {}
                 }
-            }
-            /*independ: {},
-             depend: {},
-             level1: {},
-             level2: {},
-             level3: {},
-             sum: {}*/
+            }/*,
+            independ: 0,
+             depend: 0,
+             level1: 0,
+             level2: 0,
+             level3: 0,
+             sum: 0*/
         };
 
         function _setCheckbox(form, check_b) {
@@ -188,9 +188,12 @@
         }
 
         function _setStartParams(form) {
-            opt.params.vstrecha = form.find('#form1').val(opt.const.vstrecha);
-            opt.params.initProject = form.find('#form5').val(opt.const.initProject);
-            opt.params.transferManager = form.find('#form7').val(opt.const.transferManager);
+            form.find('#form1').val(opt.const.vstrecha);
+            opt.params.vstrecha = opt.const.vstrecha;
+            form.find('#form5').val(opt.const.initProject);
+            opt.params.initProject = opt.const.initProject;
+            form.find('#form7').val(opt.const.transferManager);
+            opt.params.transferManager = opt.const.transferManager;
             _setCheckboxes(opt.form.container, 'col4');
             _setCheckboxes(opt.form.container, 'chrome_m2');
             opt.params.deadLine.firstDay = new Date();
@@ -273,35 +276,36 @@
             $("#form4").val(opt.params.decomposition);
             $("#form6").val(opt.params.testing);
             $("#form8").val(opt.params.statistic);
-            opt.params.independ = opt.params.vstrecha + opt.params.initProject + opt.params.decomposition + opt.params.statistic + opt.params.testing;
-            opt.params.depend = opt.params.quantityHours;
+            opt.independ = opt.params.vstrecha + opt.params.initProject + opt.params.decomposition + opt.params.statistic + opt.params.testing;
+            opt.depend = opt.params.quantityHours;
         }
 
         function _calcLevel1() {
-            opt.params.level1 = opt.params.depend * (opt.params.crossbrowser.desktop.chrome + opt.params.crossbrowser.desktop.ie + opt.params.crossbrowser.desktop.safari + opt.params.crossbrowser.mobile.android4 + opt.params.crossbrowser.mobile.ie + opt.params.crossbrowser.mobile.chrome);
+            opt.level1 = opt.depend * (opt.params.crossbrowser.desktop.chrome + opt.params.crossbrowser.desktop.ie + opt.params.crossbrowser.desktop.safari + opt.params.crossbrowser.mobile.android4 + opt.params.crossbrowser.mobile.iem + opt.params.crossbrowser.mobile.chrome_m);
         }
 
         function _calcLevel2() {
-            opt.params.level2 = opt.params.depend * (opt.params.adaptiv + opt.params.adaptivblock.rebuildView + opt.params.retina + opt.params.print + opt.params.hardJs + opt.params.adaptivblock.screens.lg + opt.params.adaptivblock.screens.md + opt.params.adaptivblock.screens.sm + opt.params.adaptivblock.screens.xs);
+            opt.level2 = opt.depend * (opt.params.adaptiv + opt.params.adaptivblock.rebuildView + opt.params.retina + opt.params.hardJs + opt.params.adaptivblock.screens.lg + opt.params.adaptivblock.screens.md + opt.params.adaptivblock.screens.sm + opt.params.adaptivblock.screens.xs) + opt.params.print;
         }
 
         function _calcLevel3() {
-            opt.params.level3 = opt.params.depend * (opt.params.deadLine.fast);
+            opt.level3 = opt.depend * (opt.params.deadLine.fast);
         }
 
         function _calcParams() {
-            opt.params.sum = opt.params.level1 + opt.params.level2 + opt.params.level3 + opt.params.independ;
+            opt.sum = opt.level1 + opt.level2 + opt.level3 + opt.independ;
+            $("#form12").val(opt.sum);
         }
 
         function calc() {
             _setParams(opt.form.container);
             _getCheckboxes();
             _getParams(opt.form.container);
-            //_calcBaseTime();
-            //_calcLevel1();
-            //_calcLevel2();
-            //_calcLevel3();
-            //_calcParams();
+            /*_calcBaseTime();
+            _calcLevel1();
+            _calcLevel2();
+            _calcLevel3();
+            _calcParams();*/
             $("#form12").val(opt.params.sum);
         }
 

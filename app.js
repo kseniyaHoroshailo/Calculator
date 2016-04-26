@@ -276,7 +276,7 @@
             $("#form4").val(opt.params.decomposition);
             $("#form6").val(opt.params.testing);
             $("#form8").val(opt.params.statistic);
-            opt.independ = opt.params.vstrecha + opt.params.initProject + opt.params.decomposition + opt.params.statistic + opt.params.testing;
+            opt.independ = opt.params.vstrecha + opt.params.initProject + opt.params.decomposition + opt.params.statistic + opt.params.testing + opt.params.transferManager;
             opt.depend = opt.params.quantityHours;
         }
 
